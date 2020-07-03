@@ -15,43 +15,57 @@ def dcf(operating_cashflow, maintenance_capex_percentage, capex, growth_rate_5, 
 
     owners_earnings = operating_cashflow - (capex*maintenance_capex_percentage)
     projected_cashflows = []
+    year_5_val = 0
     year_10_val = 0
+    current_cashflow = owners_earnings
     # perform cashflow projections for the first 5 years
-    for year in range(1,6):
-        current_cashflow = owners_earnings
+    for year in range(6):
         data_line = [f'year{year}', current_cashflow]
         current_cashflow += growth_rate_5*current_cashflow # same as current_cashflow = 1+growth_rate_5*current_cashflow
         projected_cashflows.append(data_line)
+        if year == 5:
+            year_5_val = current_cashflow
     # perform cashflow projections for the next 5 years
+    current_cashflow = year_5_val
     for year in range(6,11):
-        current_cashflow = owners_earnings
         data_line = [f'year{year}', current_cashflow]
-        current_cashflow += growth_rate_5 * current_cashflow  # same as current_cashflow = 1+growth_rate_5*current_cashflow
+        current_cashflow += growth_rate_10 * current_cashflow  # same as current_cashflow = 1+growth_rate_5*current_cashflow
         projected_cashflows.append(data_line)
-        if year == 10: # calculate terminal value
-            # Formula TV  =  (Owners earnings_Yr10 x (1 + g))  /  (discount_rate – g) g=terminal_growth_rate
-            intrinsic_terminal_value = (year_10_val+(1+terminal_val_growth)) / (risk_free_discount_rate-terminal_val_growth)
-            buy_terminal_value = (year_10_val + (1 + terminal_val_growth)) / (required_return_rate - terminal_val_growth)
-            data_line1 = ["Intrinsic Terminal Value", intrinsic_terminal_value]
-            data_line2 = ["Buy Price Terminal Value", buy_terminal_value]
-            projected_cashflows.append(data_line1)
-            projected_cashflows.append(data_line2)
+        if year == 9: # calculate terminal value
+            # Formula TV  =  (Owners earnings_Yr10 x (1 + g))  /  (discount_rate – g) where g=terminal_growth_rate
+            year_10_val = current_cashflow
+
+    intrinsic_terminal_value = (year_10_val+(1+terminal_val_growth)) / (risk_free_discount_rate-terminal_val_growth)
+    buy_terminal_value = (year_10_val + (1 + terminal_val_growth)) / (required_return_rate - terminal_val_growth)
+    data_line1 = ["Intrinsic Terminal Value", np.round(intrinsic_terminal_value, 2)]
+    data_line2 = ["Buy Price Terminal Value", np.round(buy_terminal_value, 2)]
+    projected_cashflows.append(data_line1)
+    projected_cashflows.append(data_line2)
 
     #create projected cashflows dataframe
     column_names = ['Year', 'ProjectedCashflow']
+
     projected_cashflows_df = pd.DataFrame(projected_cashflows, columns=column_names)
-    business_intrinsic_value = np.npv(risk_free_discount_rate, projected_cashflows_df['ProjectedCashflow'].tolist())
-    business_buy_price = np.npv(required_return_rate, projected_cashflows_df['ProjectedCashflow'].tolist())
+    # exclude year 0
+    cashflow_list = projected_cashflows_df['ProjectedCashflow'].tolist()[1:]
+    intrinsic_value_list = cashflow_list[:-1]
+    print(intrinsic_value_list)
+    business_intrinsic_value = np.npv(risk_free_discount_rate, intrinsic_value_list)
+
+    buy_price_list = cashflow_list[:-2]
+    buy_price_list.append(buy_terminal_value)
+    print(buy_price_list)
+    business_buy_price = np.npv(required_return_rate, buy_price_list)
     buy_price_per_share = business_buy_price / shares_outstanding
     # create evaluation DF
     evaluation_data = []
-    evaluation_data.append(['Intrinsic Value', business_intrinsic_value])
-    evaluation_data.append(['Business Buy Price', business_buy_price])
-    evaluation_data.append(['Buy Price per Share', buy_price_per_share])
-    evaluation_data.append(['Shares Outstanding', shares_outstanding])
+    evaluation_data.append(['Business Intrinsic Value', np.round(business_intrinsic_value, 2)])
+    evaluation_data.append(['Business Buy Price', np.round(business_buy_price,2)])
+    evaluation_data.append(['Buy Price per Share', np.round(buy_price_per_share, 2)])
+    evaluation_data.append(['Shares Outstanding', np.round(shares_outstanding,2)])
     headers = ['Metric', 'Value']
     evaluation_df = pd.DataFrame(evaluation_data, columns=headers)
 
-    return projected_cashflows_df, evaluation_df
+    return f'{projected_cashflows_df} \n {evaluation_df}'
 
-print(dcf(175000000, 0.6, 100000000, 0.07, 0.03, 0.04, 0.22))
+print(dcf(175, 0.6, 100, 0.05, 0.05, 0.03, 0.22))
