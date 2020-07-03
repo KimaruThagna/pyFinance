@@ -9,11 +9,11 @@ Owners earnings=Cashflow for owners=Operating cashflow-maintenance capEx. If you
 then Owners earnings=FreeCashFlow(FCF)
 '''
 
-def dcf(free_cashflow, maintenance_capex_percentage, capex, growth_rate_5, growth_rate_10,
+def dcf(operating_cashflow, maintenance_capex_percentage, capex, growth_rate_5, growth_rate_10,
         risk_free_discount_rate, required_return_rate, shares_outstanding=1,
         terminal_val_growth=0):
 
-    owners_earnings = free_cashflow - (capex*maintenance_capex_percentage)
+    owners_earnings = operating_cashflow - (capex*maintenance_capex_percentage)
     projected_cashflows = []
     year_10_val = 0
     # perform cashflow projections for the first 5 years
@@ -53,3 +53,5 @@ def dcf(free_cashflow, maintenance_capex_percentage, capex, growth_rate_5, growt
     evaluation_df = pd.DataFrame(evaluation_data, columns=headers)
 
     return projected_cashflows_df, evaluation_df
+
+print(dcf(175000000, 0.6, 100000000, 0.07, 0.03, 0.04, 0.22))
