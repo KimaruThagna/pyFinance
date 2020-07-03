@@ -49,12 +49,12 @@ def dcf(operating_cashflow, maintenance_capex_percentage, capex, growth_rate_5, 
     # exclude year 0
     cashflow_list = projected_cashflows_df['ProjectedCashflow'].tolist()[1:]
     intrinsic_value_list = cashflow_list[:-1]
-    print(intrinsic_value_list)
+
     business_intrinsic_value = np.npv(risk_free_discount_rate, intrinsic_value_list)
 
     buy_price_list = cashflow_list[:-2]
     buy_price_list.append(buy_terminal_value)
-    print(buy_price_list)
+
     business_buy_price = np.npv(required_return_rate, buy_price_list)
     buy_price_per_share = business_buy_price / shares_outstanding
     # create evaluation DF
