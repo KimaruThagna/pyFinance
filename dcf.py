@@ -9,8 +9,10 @@ Owners earnings=Cashflow for owners=Operating cashflow-maintenance capEx. If you
 then Owners earnings=FreeCashFlow(FCF)
 '''
 
-def dcf(owners_earnings, growth_rate_5, growth_rate_10,
-        risk_free_discount_rate, required_return_rate,
-        terminal_val_growth):
-    pass
+def dcf(free_cashflow, maintenance_capex_percentage, capex, growth_rate_5, growth_rate_10,
+        risk_free_discount_rate, required_return_rate, shares_outstanding=1,
+        terminal_val_growth=0):
 
+    owners_earnings = free_cashflow - (capex*maintenance_capex_percentage)
+    discounted_cashflows = []
+    # perform cashflow projections for the first 5 years and discount to present value
