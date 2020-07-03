@@ -37,3 +37,19 @@ def dcf(free_cashflow, maintenance_capex_percentage, capex, growth_rate_5, growt
             projected_cashflows.append(data_line1)
             projected_cashflows.append(data_line2)
 
+    #create projected cashflows dataframe
+    column_names = ['Year', 'ProjectedCashflow']
+    projected_cashflows_df = pd.DataFrame(projected_cashflows, columns=column_names)
+    business_intrinsic_value = np.npv(risk_free_discount_rate, projected_cashflows_df['ProjectedCashflow'].tolist())
+    business_buy_price = np.npv(required_return_rate, projected_cashflows_df['ProjectedCashflow'].tolist())
+    buy_price_per_share = business_buy_price / shares_outstanding
+    # create evaluation DF
+    evaluation_data = []
+    evaluation_data.append(['Intrinsic Value', business_intrinsic_value])
+    evaluation_data.append(['Business Buy Price', business_buy_price])
+    evaluation_data.append(['Buy Price per Share', buy_price_per_share])
+    evaluation_data.append(['Shares Outstanding', shares_outstanding])
+    headers = ['Metric', 'Value']
+    evaluation_df = pd.DataFrame(evaluation_data, columns=headers)
+
+    return projected_cashflows_df, evaluation_df
