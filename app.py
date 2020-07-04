@@ -2,7 +2,7 @@ import streamlit as st
 
 
 st.sidebar.markdown("Welcome to Picture-lytics.")
-page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow"])# pages
+page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow", "IRR"])# pages
 intro_text = '''
 The discounted Cashflow models is a method of discounting future cashflows of a business at a considerable rate 
 to bring it to today's value. \n 
@@ -31,6 +31,15 @@ if page == "DCF":
 
 elif page == "NPV Cashflow":
 
-    st.title("Image Classification with Google's Teachable Machine")
-    st.header("Brain Tumor MRI Classification Example")
-    st.text("Upload a brain MRI Image for image classification as tumor or no-tumor")
+    st.title("NPV Cashflow")
+    st.header("Analyze Cashflows in NPV")
+    st.text("Use this simple calculator to determine if an investment will be net positive considering cashflows and returns discounted"
+            "to present value.")
+
+elif page == "IRR":
+
+    st.title("IRR")
+    st.header("Evaluate Businesses using the IRR and MIRR methods")
+    st.text(
+        "Use this simple calculator to determine your required rate of return and baselines.")
+
