@@ -1,5 +1,5 @@
 import streamlit as st
-
+from dcf import dcf
 
 st.sidebar.markdown("Welcome to Picture-lytics.")
 page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow", "IRR"])# pages
@@ -30,15 +30,20 @@ if page == "DCF":
     st.subheader('Input the required data for Intrinsic value analysis')
     operating_cashflow = st.number_input('Enter the operating Cashflow')
     capex = st.number_input('Enter the business capital expenditure')
-    maintenance_capex_expenditure = st.number_input('What percentage of capEx is maintenance(%)')
+    maintenance_capex_percentage = st.number_input('What percentage of capEx is maintenance(%)')
     growth_5 = st.number_input('Expected growth rate as a percentage for the first 5 years of the business(%)')
     growth_10 = st.number_input('Expected growth rate as a percentage for year 6 to year 10 of the business(%)')
     risk_free_discount = st.number_input('Risk Free Discount Rate')
     required_return_rate = st.number_input('Required Return Rate')
     shares_outstanding = st.number_input('Shares outstanding in the business')
     terminal_value_growth_rate = st.number_input('Terminal Value Growth Rate(%)')
-
-
+    #data computation and output
+    cashflows, metrics = dcf(operating_cashflow,maintenance_capex_percentage,capex,
+                             growth_5, growth_10, risk_free_discount, required_return_rate,
+                             shares_outstanding, terminal_value_growth_rate)
+    st.subheader('Business Projected Metrics')
+    st.dataframe(cashflows)
+    st.dataframe(metrics)
 
 
 elif page == "NPV Cashflow":
