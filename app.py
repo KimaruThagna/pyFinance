@@ -14,7 +14,12 @@ Capital Expenditure (CapEx)- Amount spent on capital assets that will generate r
 Maintenance CapEx percentage- The percentage of capEx that a business used in maintenance of plant property and equipment. \n
 0-5 Year growth Rate- Projected percentage growth that this business will have over the next 5 years on its cashflows\n
 6-10 Year growth Rate- Projected percentage growth that this business will have over the next 6-10 years on its cashflows. Should ideally be lower that the 0-5.\n
-Risk 
+Risk Free Rate (%)- The discount rate that you use to bring future cashflows to present value and hence determine intrinsic value of business. 
+This rate is usually the interest on treasury risk free bonds since theyre considered almost risk free. It is believed that its almost impossible for a government to default. \n
+Required Return Rate (%)- Your desired rate of return from this business. Will be used to calculate the buying price by discounting future cashflows to present day value. \n
+Shares outstanding- The number of pieces of a business that are available in the market. Allows calculation of the buy price per share. If you are buying the whole business, then the share outstanding value becomes 1. \n
+Terminal Growth Rate (%) - The rate at which you expect the terminal value of a business to grow. Ideally, for a conservative measure, it should be 0. \n
+Terminal value computation is done via the growth perpetuity model with g=0% by default. 
 '''
 if page == "DCF":
 
