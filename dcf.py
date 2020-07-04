@@ -66,6 +66,6 @@ def dcf(operating_cashflow, maintenance_capex_percentage, capex, growth_rate_5, 
     headers = ['Metric', 'Value']
     evaluation_df = pd.DataFrame(evaluation_data, columns=headers)
 
-    return f'{projected_cashflows_df} \n {evaluation_df}'
+    return projected_cashflows_df, evaluation_df
 
-print(dcf(175, 0.6, 100, 0, 0, 0.03, 0.22))
+#print(dcf(175, 0.6, 100, 0, 0, 0.03, 0.22))

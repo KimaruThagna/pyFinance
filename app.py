@@ -38,12 +38,15 @@ if page == "DCF":
     shares_outstanding = st.number_input('Shares outstanding in the business')
     terminal_value_growth_rate = st.number_input('Terminal Value Growth Rate(%)')
     #data computation and output
-    cashflows, metrics = dcf(operating_cashflow,maintenance_capex_percentage,capex,
-                             growth_5, growth_10, risk_free_discount, required_return_rate,
-                             shares_outstanding, terminal_value_growth_rate)
-    st.subheader('Business Projected Metrics')
-    st.dataframe(cashflows)
-    st.dataframe(metrics)
+    if required_return_rate != 0.00 and maintenance_capex_percentage !=  0.00 \
+        and risk_free_discount != 0.00:
+        cashflows, metrics = dcf(operating_cashflow,(maintenance_capex_percentage/100),capex,
+                                 (growth_5/100), (growth_10/100), (risk_free_discount/100), (required_return_rate/100),
+                                 shares_outstanding, (terminal_value_growth_rate/100) )
+        st.subheader('Business Projected Cashflows over 10 Yrs')
+        st.dataframe(cashflows)
+        st.subheader('Business Projected Metrics')
+        st.dataframe(metrics)
 
 
 elif page == "NPV Cashflow":
