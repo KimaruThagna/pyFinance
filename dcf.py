@@ -68,4 +68,4 @@ def dcf(operating_cashflow, maintenance_capex_percentage, capex, growth_rate_5, 
 
     return f'{projected_cashflows_df} \n {evaluation_df}'
 
-print(dcf(175, 0.6, 100, 0.05, 0.05, 0.03, 0.22))
+print(dcf(175, 0.6, 100, 0, 0, 0.03, 0.22))
