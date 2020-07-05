@@ -1,7 +1,7 @@
 import streamlit as st
 from dcf import dcf
 
-st.sidebar.markdown("Welcome to Picture-lytics.")
+st.sidebar.markdown("Welcome to InvestorLytica.")
 page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow", "IRR"])# pages
 intro_text = '''
 The discounted Cashflow models is a method of discounting future cashflows of a business at a considerable rate 
@@ -55,6 +55,12 @@ elif page == "NPV Cashflow":
     st.header("Analyze Cashflows in NPV")
     st.text("Use this simple calculator to determine if an investment will be net positive considering cashflows and returns discounted"
             "to present value.")
+    initial_investment = st.number_input('Initial Investment')
+    annual_return = st.number_input('What you project to be getting annually in returns')
+    annual_growth_rate = st.number_input('Projected annual growth rate of returns')
+    years = st.number_input('Number of years you plan to hold onto the investment')
+    terminal_value = st.number_input('What you project to sell your stake for')
+
 
 elif page == "IRR":
 
