@@ -22,9 +22,11 @@ def company_profile(ticker_symbol):
     return data_pull('profile', ticker_symbol)
 
 def company_financial_statements(ticker_symbol):
-    annual_income_statement = data_pull('financials/income-statement', ticker_symbol)
-    annual_balance_sheet =
-    annual_cashflow_statement =
+
+    annual_income_statement = data_pull('financials/income-statement', ticker_symbol, params={'period':'annual'})
+    annual_balance_sheet = data_pull('financials/balance-sheet-statement', ticker_symbol, params={'period':'annual'})
+    annual_cashflow_statement = data_pull('financials/cash-flow-statement', ticker_symbol, params={'period':'annual'})
+    return annual_income_statement, annual_balance_sheet, annual_cashflow_statement
 
 def company_financial_ratios_and_metrics(ticker_symbol):
     pass
