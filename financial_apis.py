@@ -26,13 +26,12 @@ def company_financial_statements(ticker_symbol):
     annual_income_statement = data_pull('financials/income-statement', ticker_symbol, params={'period':'annual'})
     annual_balance_sheet = data_pull('financials/balance-sheet-statement', ticker_symbol, params={'period':'annual'})
     annual_cashflow_statement = data_pull('financials/cash-flow-statement', ticker_symbol, params={'period':'annual'})
-    return annual_income_statement["financials"], \
-           annual_balance_sheet["financials"], annual_cashflow_statement["financials"]
+    return annual_income_statement, annual_balance_sheet, annual_cashflow_statement
 
 def company_financial_ratios_and_metrics(ticker_symbol):
     ratios = data_pull('ratios', ticker_symbol)
     metrics = data_pull('key-metrics', ticker_symbol)
-    return ratios['ratios'], metrics['metrics']
+    return metrics, ratios
 
 def company_dcf_analysis(ticker_symbol):
     pass
@@ -43,4 +42,6 @@ def company_dcf_api(ticker_symbol):
 
 def company_growth_figures(ticker_symbol):
     growth = data_pull('financial-growth', ticker_symbol)
-    return growth['growth']
+    return growth
+
+print(company_financial_ratios_and_metrics('AAPL'))
