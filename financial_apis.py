@@ -41,4 +41,5 @@ def company_dcf_api(ticker_symbol):
     pass
 
 def company_growth_figures(ticker_symbol):
-    pass
+    growth = data_pull('financial-growth', ticker_symbol)
+    return growth['growth']
