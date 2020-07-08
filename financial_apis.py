@@ -5,21 +5,26 @@ load_dotenv()
 root_url = 'https://financialmodelingprep.com/api/v3/'
 
 
-def data_pull(domain, ticker_symbol):
+def data_pull(domain, ticker_symbol, params=None):
     key = os.getenv('API_KEY')
-    url = f'{root_url}'
     PARAMS = {'apikey': key}
+    if params:
+        PARAMS.update(params)
+
     try:
-        data = requests.get(url=f'{url}{domain}/{ticker_symbol}', params=PARAMS)
-        return data.json()
+        data = requests.get(url=f'{root_url}{domain}/{ticker_symbol}', params=PARAMS)
+        return data.json()[0]
     except Exception as e:
         return f'An error occured{e}'
 
 def company_profile(ticker_symbol):
-    pass
+
+    return data_pull('profile', ticker_symbol)
 
 def company_financial_statements(ticker_symbol):
-    pass
+    annual_income_statement = data_pull('financials/income-statement', ticker_symbol)
+    annual_balance_sheet =
+    annual_cashflow_statement =
 
 def company_financial_ratios_and_metrics(ticker_symbol):
     pass
@@ -32,4 +37,3 @@ def company_dcf_api(ticker_symbol):
 
 def company_growth_figures(ticker_symbol):
     pass
-
