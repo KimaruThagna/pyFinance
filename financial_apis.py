@@ -4,6 +4,7 @@ load_dotenv()
 
 root_url = 'https://financialmodelingprep.com/api/v3/'
 
+
 def data_pull(ticker_symbol):
     key = os.getenv('API_KEY')
     url = f'{root_url}'
