@@ -2,6 +2,9 @@ import requests
 
 root_url = 'https://financialmodelingprep.com/api/v3/'
 
+def data_pull(ticker_symbol):
+    url = f'{root_url}'
+    pass
 
 def company_profile(ticker_symbol):
     pass
