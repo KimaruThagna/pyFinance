@@ -2,7 +2,7 @@ import streamlit as st
 from dcf import dcf
 
 st.sidebar.markdown("Welcome to InvestorLytica.")
-page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow", "IRR"])# pages
+page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow", "IRR", "Data Pull"])# pages
 intro_text = '''
 The discounted Cashflow models is a method of discounting future cashflows of a business at a considerable rate 
 to bring it to today's value. \n 
@@ -68,4 +68,10 @@ elif page == "IRR":
     st.header("Evaluate Businesses using the IRR and MIRR methods")
     st.text(
         "Use this simple calculator to determine your required rate of return and baselines.")
+
+elif page == "Data Pull":
+
+    st.title("Financial Data")
+    st.header("Financial Data from Financial model Prep API Resource")
+    st.text("Main URL: https://financialmodelingprep.com/api/v3/")
 
