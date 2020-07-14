@@ -31,10 +31,14 @@ def company_financial_statements(ticker_symbol):
     return pd.DataFrame(annual_income_statement), \
            pd.DataFrame(annual_balance_sheet), pd.DataFrame(annual_cashflow_statement)
 
-def company_financial_ratios_and_metrics(ticker_symbol):
+def company_financial_ratios(ticker_symbol):
     ratios = data_pull('ratios', ticker_symbol)
+    return  pd.DataFrame(ratios)
+
+
+def company_financial_metrics(ticker_symbol):
     metrics = data_pull('key-metrics', ticker_symbol)
-    return pd.DataFrame(metrics), pd.DataFrame(ratios)
+    return pd.DataFrame(metrics)
 
 def company_dcf_analysis(ticker_symbol):
     pass
@@ -48,4 +52,4 @@ def company_growth_figures(ticker_symbol):
 
     return pd.DataFrame(growth)
 
-print(company_growth_figures('AAPL'))
+#print(company_financial_metrics('AAPL'))

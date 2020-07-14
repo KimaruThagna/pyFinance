@@ -75,6 +75,7 @@ elif page == "Data Pull":
     st.header("Financial Data from Financial model Prep API Resource")
     st.text("Main URL: https://financialmodelingprep.com/api/v3/")
     ticker = st.text_input("Enter Ticker symbol")
+    ticker = ticker.upper()
     if ticker:
         profile_defaults = ['symbol', 'price']
         st.subheader('Company Profile')
@@ -86,20 +87,21 @@ elif page == "Data Pull":
         metrics_defaults = ['symbol', 'date', 'revenuePerShare']
         ratios_defaults = ['symbol', 'date', 'currentRatio']
         st.subheader('Company Financial Metrics')
-        metrics, ratios = company_financial_ratios_and_metrics(ticker)
-        selected_columns = st.multiselect('Select desired Columns', metrics.columns.to_list(), default=metrics_defaults)
-        st.dataframe(metrics[selected_columns])
+        metrics = company_financial_metrics(ticker)
+        metrics_selected_columns = st.multiselect('Select desired Columns', metrics.columns.to_list(), default=metrics_defaults)
+        st.dataframe(metrics[metrics_selected_columns])
         # ratios
         st.subheader('Company Financial Ratios')
-        selected_columns = st.multiselect('Select desired Columns', ratios.columns.to_list(), default=ratios_defaults)
-        st.dataframe(ratios[selected_columns])
+        ratios = company_financial_ratios(ticker)
+        ratios_selected_columns = st.multiselect('Select desired Columns', ratios.columns.to_list(), default=ratios_defaults)
+        st.dataframe(ratios[ratios_selected_columns])
 
         # growth
-        statements_defaults = ['symbol', 'date', 'revenueGrowth']
+        growth_defaults = ['symbol', 'date', 'revenueGrowth']
         st.subheader('Company Projected growth')
         growth = company_growth_figures(ticker)
-        selected_columns = st.multiselect('Select desired Columns', growth.columns.to_list(), default=statements_defaults)
-        st.dataframe(growth[selected_columns])
+        growth_selected_columns = st.multiselect('Select desired Columns', growth.columns.to_list(), default=growth_defaults)
+        st.dataframe(growth[growth_selected_columns])
 
 
 
