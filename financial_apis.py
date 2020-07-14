@@ -45,7 +45,7 @@ def company_dcf_analysis(ticker_symbol):
 
 def company_dcf_api(ticker_symbol):
 
-    return data_pull('discounted-cash-flow', ticker_symbol)
+    return pd.DataFrame(data_pull('discounted-cash-flow', ticker_symbol))
 
 def company_growth_figures(ticker_symbol):
     growth = data_pull('financial-growth', ticker_symbol)

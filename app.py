@@ -104,8 +104,8 @@ elif page == "Data Pull":
         st.dataframe(growth[growth_selected_columns])
 
         # dcf
-        dcf_defaults = ['symbol', 'date', 'revenueGrowth']
-        st.subheader('Company Estimated DCF')
+        dcf_defaults = ['symbol', 'date', 'dcf']
+        st.subheader('Company Estimated DCF From API')
         dcf = company_dcf_api(ticker)
         dcf_selected_columns = st.multiselect('Select desired Columns', dcf.columns.to_list(),
                                                  default=dcf_defaults)
@@ -124,4 +124,4 @@ elif page == "Data Pull":
         # # income
         #
 
-
+#THINK OF GRAPHS
