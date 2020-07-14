@@ -103,17 +103,25 @@ elif page == "Data Pull":
         growth_selected_columns = st.multiselect('Select desired Columns', growth.columns.to_list(), default=growth_defaults)
         st.dataframe(growth[growth_selected_columns])
 
-        # balance sheet
-        balance_defaults = ['symbol', 'date', 'revenueGrowth']
-        st.subheader('Company Balance sheet')
-        income, balance_sheet, cashflow = company_financial_statements(ticker)
-        selected_columns = st.multiselect('Select desired Columns', balance_sheet.columns.to_list(),
-                                                 default=balance_defaults)
-        st.dataframe(balance_sheet[selected_columns])
+        # dcf
+        dcf_defaults = ['symbol', 'date', 'revenueGrowth']
+        st.subheader('Company Estimated DCF')
+        dcf = company_dcf_api(ticker)
+        dcf_selected_columns = st.multiselect('Select desired Columns', dcf.columns.to_list(),
+                                                 default=dcf_defaults)
+        st.dataframe(dcf[dcf_selected_columns])
 
-        #cashflow statement
-
-        # income
-
+        # # balance sheet
+        # balance_defaults = ['symbol', 'date']
+        # st.subheader('Company Balance sheet')
+        # income, balance_sheet, cashflow = company_financial_statements(ticker)
+        # selected_columns = st.multiselect('Select desired Columns', balance_sheet.columns.to_list(),
+        #                                          default=balance_defaults)
+        # st.dataframe(balance_sheet[selected_columns])
+        #
+        # #cashflow statement
+        #
+        # # income
+        #
 
 
