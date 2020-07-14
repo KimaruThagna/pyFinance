@@ -82,7 +82,7 @@ elif page == "Data Pull":
         selected_columns = st.multiselect('Select desired Columns', data.columns.to_list(), default=profile_defaults)
         st.dataframe(data[selected_columns])
 
-        # ratios and metrics
+        #metrics
         metrics_defaults = ['symbol', 'date', 'revenuePerShare']
         ratios_defaults = ['symbol', 'date', 'currentRatio']
         st.subheader('Company Financial Metrics')
@@ -93,6 +93,13 @@ elif page == "Data Pull":
         st.subheader('Company Financial Ratios')
         selected_columns = st.multiselect('Select desired Columns', ratios.columns.to_list(), default=ratios_defaults)
         st.dataframe(ratios[selected_columns])
+
+        # growth
+        statements_defaults = ['symbol', 'date', 'revenueGrowth']
+        st.subheader('Company Projected growth')
+        growth = company_growth_figures(ticker)
+        selected_columns = st.multiselect('Select desired Columns', growth.columns.to_list(), default=statements_defaults)
+        st.dataframe(growth[selected_columns])
 
 
 
