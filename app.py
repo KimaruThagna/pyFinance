@@ -74,4 +74,6 @@ elif page == "Data Pull":
     st.title("Financial Data")
     st.header("Financial Data from Financial model Prep API Resource")
     st.text("Main URL: https://financialmodelingprep.com/api/v3/")
+    st.text_input("Enter Ticker symbol")
+
 
