@@ -76,8 +76,10 @@ elif page == "Data Pull":
     st.text("Main URL: https://financialmodelingprep.com/api/v3/")
     ticker = st.text_input("Enter Ticker symbol")
     if ticker:
-        defaults = ['symbol', 'date']
+        profile_defaults = ['symbol', 'price']
         st.subheader('Company Profile')
         data = company_profile(ticker)
-        selected_columns = st.multiselect('Sekect desired Columns', data.columns.to_list(), default=defaults)
+        selected_columns = st.multiselect('Select desired Columns', data.columns.to_list(), default=profile_defaults)
+        st.dataframe(data[selected_columns])
+
 
