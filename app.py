@@ -1,5 +1,5 @@
 import streamlit as st
-from dcf import dcf
+from financial_apis import *
 
 st.sidebar.markdown("Welcome to InvestorLytica.")
 page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow", "IRR", "Data Pull"])# pages
@@ -74,6 +74,10 @@ elif page == "Data Pull":
     st.title("Financial Data")
     st.header("Financial Data from Financial model Prep API Resource")
     st.text("Main URL: https://financialmodelingprep.com/api/v3/")
-    st.text_input("Enter Ticker symbol")
-
+    ticker = st.text_input("Enter Ticker symbol")
+    if ticker:
+        defaults = ['symbol', 'date']
+        st.subheader('Company Profile')
+        data = company_profile(ticker)
+        selected_columns = st.multiselect('Sekect desired Columns', data.columns.to_list(), default=defaults)
 

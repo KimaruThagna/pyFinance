@@ -1,6 +1,7 @@
 import requests, os
 import pandas as pd
 from dotenv import load_dotenv
+from dcf import dcf
 load_dotenv()
 
 root_url = 'https://financialmodelingprep.com/api/v3/'
