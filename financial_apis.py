@@ -48,4 +48,4 @@ def company_growth_figures(ticker_symbol):
 
     return pd.DataFrame(growth)
 
-print(company_profile('AAPL'))
+print(company_financial_ratios_and_metrics('AAPL'))
