@@ -58,3 +58,5 @@ def company_growth_figures(ticker_symbol):
     growth = data_pull('financial-growth', ticker_symbol)
 
     return pd.DataFrame(growth)
+
+print(company_income_statement('AAPL'))

@@ -120,14 +120,19 @@ elif page == "Data Pull":
         st.dataframe(balance_sheet[selected_columns])
 
         #cashflow statement
-        balance_defaults = ['date', 'Cash and cash equivalents']
-        st.subheader('Company Balance sheet')
-        balance_sheet = company_balance_sheet(ticker)
-        selected_columns = st.multiselect('Select desired Columns', balance_sheet.columns.to_list(),
-                                          default=balance_defaults)
-        st.dataframe(balance_sheet[selected_columns])
+        cf_defaults = ['date', ' Operating Cash Flow']
+        st.subheader('Company Cashflow Statements')
+        cf = company_cashflow(ticker)
+        selected_columns = st.multiselect('Select desired Columns', cf.columns.to_list(),
+                                          default=cf_defaults)
+        st.dataframe(cf[selected_columns])
 
         # income
-
+        income_defaults = ['date', ' Revenue', 'Gross Profit']
+        st.subheader('Company Income Statements')
+        income = company_cashflow(ticker)
+        selected_columns = st.multiselect('Select desired Columns', income.columns.to_list(),
+                                          default=income_defaults)
+        st.dataframe(income[selected_columns])
 
 #THINK OF GRAPHS
