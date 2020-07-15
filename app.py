@@ -112,14 +112,20 @@ elif page == "Data Pull":
         st.dataframe(dcf[dcf_selected_columns])
 
         # balance sheet
-        balance_defaults = ['symbol', 'date']
+        balance_defaults = ['date', 'Cash and cash equivalents']
         st.subheader('Company Balance sheet')
-        income, balance_sheet, cashflow = company_financial_statements(ticker)
+        balance_sheet = company_balance_sheet(ticker)
         selected_columns = st.multiselect('Select desired Columns', balance_sheet.columns.to_list(),
                                                  default=balance_defaults)
         st.dataframe(balance_sheet[selected_columns])
 
         #cashflow statement
+        balance_defaults = ['date', 'Cash and cash equivalents']
+        st.subheader('Company Balance sheet')
+        balance_sheet = company_balance_sheet(ticker)
+        selected_columns = st.multiselect('Select desired Columns', balance_sheet.columns.to_list(),
+                                          default=balance_defaults)
+        st.dataframe(balance_sheet[selected_columns])
 
         # income
 
