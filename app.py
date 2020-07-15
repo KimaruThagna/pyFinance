@@ -1,5 +1,6 @@
 import streamlit as st
 from financial_apis import *
+import seaborn as sns
 
 st.sidebar.markdown("Welcome to InvestorLytica.")
 page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow", "IRR", "Data Pull"])# pages
@@ -90,6 +91,12 @@ elif page == "Data Pull":
         metrics = company_financial_metrics(ticker)
         metrics_selected_columns = st.multiselect('Select desired Columns', metrics.columns.to_list(), default=metrics_defaults)
         st.dataframe(metrics[metrics_selected_columns])
+        display = st.checkbox('Display Graph')
+        if display:
+            # graph
+            fig = sns.lineplot(data=metrics, x=metrics['date'],
+                               y=metrics[selected_columns.remove('date')], hue=selected_columns.remove('date'))
+            st.pyplot(fig)
         # ratios
         st.subheader('Company Financial Ratios')
         ratios = company_financial_ratios(ticker)
