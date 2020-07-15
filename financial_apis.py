@@ -23,13 +23,20 @@ def company_profile(ticker_symbol):
 
     return pd.DataFrame(data_pull('profile', ticker_symbol))
 
-def company_financial_statements(ticker_symbol):
+def company_income_statement(ticker_symbol):
 
     annual_income_statement = data_pull('financials/income-statement', ticker_symbol, params={'period':'annual'})
     annual_balance_sheet = data_pull('financials/balance-sheet-statement', ticker_symbol, params={'period':'annual'})
     annual_cashflow_statement = data_pull('financials/cash-flow-statement', ticker_symbol, params={'period':'annual'})
-    return pd.DataFrame(annual_income_statement), \
-           pd.DataFrame(annual_balance_sheet), pd.DataFrame(annual_cashflow_statement)
+    return pd.DataFrame(annual_income_statement['financials'])
+
+def company_balance_sheet(ticker_symbol):
+    annual_balance_sheet = data_pull('financials/balance-sheet-statement', ticker_symbol, params={'period':'annual'})
+    return pd.DataFrame(annual_balance_sheet['financials'])
+
+def company_cashflow(ticker_symbol):
+    annual_cashflow_statement = data_pull('financials/cash-flow-statement', ticker_symbol, params={'period':'annual'})
+    return pd.DataFrame(annual_cashflow_statement['financials'])
 
 def company_financial_ratios(ticker_symbol):
     ratios = data_pull('ratios', ticker_symbol)
@@ -51,5 +58,3 @@ def company_growth_figures(ticker_symbol):
     growth = data_pull('financial-growth', ticker_symbol)
 
     return pd.DataFrame(growth)
-
-print(company_dcf_api('AAPL'))
