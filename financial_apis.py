@@ -20,14 +20,11 @@ def data_pull(domain, ticker_symbol, params=None):
         return [{"Error":f'An error occured{e}'}]
 
 def company_profile(ticker_symbol):
-
     return pd.DataFrame(data_pull('profile', ticker_symbol))
 
 def company_income_statement(ticker_symbol):
 
     annual_income_statement = data_pull('financials/income-statement', ticker_symbol, params={'period':'annual'})
-    annual_balance_sheet = data_pull('financials/balance-sheet-statement', ticker_symbol, params={'period':'annual'})
-    annual_cashflow_statement = data_pull('financials/cash-flow-statement', ticker_symbol, params={'period':'annual'})
     return pd.DataFrame(annual_income_statement['financials'])
 
 def company_balance_sheet(ticker_symbol):
@@ -56,7 +53,7 @@ def company_dcf_api(ticker_symbol):
 
 def company_growth_figures(ticker_symbol):
     growth = data_pull('financial-growth', ticker_symbol)
-
     return pd.DataFrame(growth)
+
 
 print(company_income_statement('AAPL'))

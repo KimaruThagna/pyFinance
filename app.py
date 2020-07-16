@@ -94,9 +94,12 @@ elif page == "Data Pull":
         display = st.checkbox('Display Graph')
         if display:
             # graph
-            fig = sns.lineplot(data=metrics, x=metrics['date'],
-                               y=metrics[selected_columns.remove('date')], hue=selected_columns.remove('date'))
-            st.pyplot(fig)
+            if 'symbol' in metrics_selected_columns:
+                metrics_selected_columns.remove('symbol')
+            if 'date' not in metrics_selected_columns:
+                metrics_selected_columns.append('date')
+
+            st.line_chart(metrics[metrics_selected_columns].rename(columns={'date':'index'}).set_index('index'))
         # ratios
         st.subheader('Company Financial Ratios')
         ratios = company_financial_ratios(ticker)
@@ -127,7 +130,7 @@ elif page == "Data Pull":
         st.dataframe(balance_sheet[selected_columns])
 
         #cashflow statement
-        cf_defaults = ['date', ' Operating Cash Flow']
+        cf_defaults = ['date', 'Operating Cash Flow']
         st.subheader('Company Cashflow Statements')
         cf = company_cashflow(ticker)
         selected_columns = st.multiselect('Select desired Columns', cf.columns.to_list(),
@@ -135,9 +138,9 @@ elif page == "Data Pull":
         st.dataframe(cf[selected_columns])
 
         # income
-        income_defaults = ['date', ' Revenue', 'Gross Profit']
+        income_defaults = ['date', 'Revenue', 'Gross Profit']
         st.subheader('Company Income Statements')
-        income = company_cashflow(ticker)
+        income = company_income_statement(ticker)
         selected_columns = st.multiselect('Select desired Columns', income.columns.to_list(),
                                           default=income_defaults)
         st.dataframe(income[selected_columns])
