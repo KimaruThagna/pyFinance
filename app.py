@@ -83,10 +83,20 @@ elif page == "Data Pull":
         data = company_profile(ticker)
         selected_columns = st.multiselect('Select desired Columns', data.columns.to_list(), default=profile_defaults)
         st.dataframe(data[selected_columns])
+        display = st.checkbox('Display Graph')
+        if display:
+            # graph
+            if 'symbol' in selected_columns:
+                selected_columns.remove('symbol')
+            if 'date' not in selected_columns:
+                selected_columns.append('date')
+
+            st.line_chart(data[selected_columns].rename(columns={'date': 'index'}).set_index('index'))
+
 
         #metrics
         metrics_defaults = ['symbol', 'date', 'revenuePerShare']
-        ratios_defaults = ['symbol', 'date', 'currentRatio']
+
         st.subheader('Company Financial Metrics')
         metrics = company_financial_metrics(ticker)
         metrics_selected_columns = st.multiselect('Select desired Columns', metrics.columns.to_list(), default=metrics_defaults)
@@ -103,8 +113,19 @@ elif page == "Data Pull":
         # ratios
         st.subheader('Company Financial Ratios')
         ratios = company_financial_ratios(ticker)
+        ratios_defaults = ['symbol', 'date', 'currentRatio']
         ratios_selected_columns = st.multiselect('Select desired Columns', ratios.columns.to_list(), default=ratios_defaults)
         st.dataframe(ratios[ratios_selected_columns])
+
+        display = st.checkbox('Display Graph')
+        if display:
+            # graph
+            if 'symbol' in ratios_selected_columns:
+                ratios_selected_columns.remove('symbol')
+            if 'date' not in ratios_selected_columns:
+                ratios_selected_columns.append('date')
+
+            st.line_chart(ratios[ratios_selected_columns].rename(columns={'date': 'index'}).set_index('index'))
 
         # growth
         growth_defaults = ['symbol', 'date', 'revenueGrowth']
@@ -112,6 +133,17 @@ elif page == "Data Pull":
         growth = company_growth_figures(ticker)
         growth_selected_columns = st.multiselect('Select desired Columns', growth.columns.to_list(), default=growth_defaults)
         st.dataframe(growth[growth_selected_columns])
+
+        display = st.checkbox('Display Graph')
+        if display:
+            # graph
+            if 'symbol' in growth_selected_columns:
+                growth_selected_columns.remove('symbol')
+            if 'date' not in growth_selected_columns:
+                growth_selected_columns.append('date')
+
+            st.line_chart(growth[growth_selected_columns].rename(columns={'date': 'index'}).set_index('index'))
+
 
         # dcf
         dcf_defaults = ['symbol', 'date', 'dcf']
