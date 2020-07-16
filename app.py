@@ -83,16 +83,6 @@ elif page == "Data Pull":
         data = company_profile(ticker)
         selected_columns = st.multiselect('Select desired Columns', data.columns.to_list(), default=profile_defaults)
         st.dataframe(data[selected_columns])
-        display = st.checkbox('Display Graph')
-        if display:
-            # graph
-            if 'symbol' in selected_columns:
-                selected_columns.remove('symbol')
-            if 'date' not in selected_columns:
-                selected_columns.append('date')
-
-            st.line_chart(data[selected_columns].rename(columns={'date': 'index'}).set_index('index'))
-
 
         #metrics
         metrics_defaults = ['symbol', 'date', 'revenuePerShare']
@@ -101,7 +91,7 @@ elif page == "Data Pull":
         metrics = company_financial_metrics(ticker)
         metrics_selected_columns = st.multiselect('Select desired Columns', metrics.columns.to_list(), default=metrics_defaults)
         st.dataframe(metrics[metrics_selected_columns])
-        display = st.checkbox('Display Graph')
+        display = st.checkbox('Display Metrics Graph')
         if display:
             # graph
             if 'symbol' in metrics_selected_columns:
@@ -117,7 +107,7 @@ elif page == "Data Pull":
         ratios_selected_columns = st.multiselect('Select desired Columns', ratios.columns.to_list(), default=ratios_defaults)
         st.dataframe(ratios[ratios_selected_columns])
 
-        display = st.checkbox('Display Graph')
+        display = st.checkbox('Display Ratios Graph')
         if display:
             # graph
             if 'symbol' in ratios_selected_columns:
@@ -134,7 +124,7 @@ elif page == "Data Pull":
         growth_selected_columns = st.multiselect('Select desired Columns', growth.columns.to_list(), default=growth_defaults)
         st.dataframe(growth[growth_selected_columns])
 
-        display = st.checkbox('Display Graph')
+        display = st.checkbox('Display Growth Graph')
         if display:
             # graph
             if 'symbol' in growth_selected_columns:
