@@ -1,6 +1,6 @@
 import streamlit as st
 from financial_apis import *
-import seaborn as sns
+
 
 st.sidebar.markdown("Welcome to InvestorLytica.")
 page = st.sidebar.selectbox("Choose task", ["DCF", "NPV Cashflow", "IRR", "Data Pull"])# pages
