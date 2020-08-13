@@ -8,10 +8,7 @@ ENV PYTHONUNBUFFERED 1
 # create the app user
 RUN addgroup -S $APP_USER && adduser -S $APP_USER -G $APP_USER
 # set work directory
-
-
 RUN mkdir -p $MICRO_SERVICE
-RUN mkdir -p $MICRO_SERVICE/static
 
 # where our code lives
 WORKDIR $MICRO_SERVICE
