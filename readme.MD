@@ -21,7 +21,20 @@ This interface if for manually entering numbers and then performing the projecte
 ![cashflows](screenshots/dcf2.png)
 
 #### API Pulled Data
+Dynamic selection tool to choose columns from dataset
 ![cashflows](screenshots/api1.png)
+Viewing selected data in a table
+
+![cashflows](screenshots/api2.png)
+Viewing selected data as an annotated line graph
+
+![cashflows](screenshots/api3.png)
+Compare more than one entity using line graphs
+
+![cashflows](screenshots/api4.png)
+
+
+![cashflows](screenshots/api5.png)
 
 
 ## DCF Modeling
