@@ -9,7 +9,13 @@ All about the time value of money.
 To run this project, you require an API key from [Financial model prep]()
 After obtaining the key, paste it into the `API_KEY` variable in the `.env file.
 ## Spin up Docker image and run project
+To build the docker image, navigate to your working directory and run the command
 
+`docker build -f Dockerfile -t app:my_tag`
+
+After a succesfful build, run the command
+
+```docker run -p 8501:8501 app:my_tag```
 
 ## Screens
 Sample screens from running of the app.
