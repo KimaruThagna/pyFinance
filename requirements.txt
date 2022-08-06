@@ -1,5 +1,5 @@
 numpy==1.18.0
 pandas==0.25.3
-streamlit==0.64.0
+streamlit==1.11.1
 python-dotenv==0.13.0
 requests==2.22.0
